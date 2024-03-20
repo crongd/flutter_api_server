@@ -1,10 +1,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.apiserver.ProductMapper" >
+<mapper namespace="com.apiserver.mappers.ProductMapper" >
 
     <select id="select_product_list" resultType="com.apiserver.dto.ProductDTO" >
-        select * from product;
+        <if test="no == 0">
+            select * from product
+        </if>
+        <if test="no != 0">
+            SELECT *, p.no as p_no FROM category c left outer join product p on c.no = p.category_no where c.parent_no = #{no};
+        </if>
     </select>
 
     <resultMap id="select_product_resultMap" type="com.apiserver.dto.ProductDTO" autoMapping="true">
@@ -20,6 +25,14 @@
         inner join product_img pi
         on p.no = pi.product_no
         where p.no = #{no}
+    </select>
+
+    <select id="select_basket_product" resultType="com.apiserver.dto.ProductDTO">
+        select * from shopping_cart sc inner join product p on sc.product_no = p.no;
+    </select>
+
+    <select id="select_parent_category" resultType="com.apiserver.dto.CategoryDTO">
+        select * from category where parent_no = 0;
     </select>
 
 </mapper>

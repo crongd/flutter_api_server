@@ -15,4 +15,5 @@ public class ProductDTO {
     private String mainImg;
     private List<String> images;
     private int price;
+    private int amount;
 }
