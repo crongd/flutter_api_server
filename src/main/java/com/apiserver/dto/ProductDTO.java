@@ -14,6 +14,7 @@ public class ProductDTO {
     private String title;
     private String mainImg;
     private List<String> images;
+    private List<OptionDTO> options;
     private int price;
     private int amount;
 }

@@ -23,6 +23,9 @@ public class CategoryController {
 
     @GetMapping("/children_category")
     public List<CategoryDTO> select_children_category(@RequestParam("no") String no) {
+        if (Integer.parseInt(no) == 0) {
+            return null;
+        }
         return categoryMapper.select_parent_category(Integer.parseInt(no));
     }
 }

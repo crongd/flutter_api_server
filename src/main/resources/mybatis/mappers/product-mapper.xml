@@ -7,8 +7,11 @@
         <if test="no == 0">
             select * from product
         </if>
-        <if test="no != 0">
+        <if test="no lt 5 and no gt 0">
             SELECT *, p.no as p_no FROM category c left outer join product p on c.no = p.category_no where c.parent_no = #{no};
+        </if>
+        <if test="no gt 4 ">
+            SELECT * FROM shopping_db.product where category_no = #{no};
         </if>
     </select>
 
@@ -17,14 +20,20 @@
         <collection property="images" javaType="list" ofType="string">
             <result column="product_img"/>
         </collection>
+        <collection property="options" javaType="list" ofType="com.apiserver.dto.OptionDTO" autoMapping="true">
+            <id property="no" column="po_no"/>
+            <result property="productNo" column="" />
+        </collection>
     </resultMap>
 
     <select id="select_product" resultMap="select_product_resultMap" >
-        select *,p.no as p_no, pi.no as pi_no
+        select *,p.no as p_no, pi.no as pi_no, po.no as po_no
         from product p
         inner join product_img pi
         on p.no = pi.product_no
-        where p.no = #{no}
+        left outer join product_option po
+        on p.no = po.product_no
+        where p.no = #{no};
     </select>
 
     <select id="select_basket_product" resultType="com.apiserver.dto.ProductDTO">

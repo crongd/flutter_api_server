@@ -4,7 +4,15 @@
 <mapper namespace="com.apiserver.mappers.CategoryMapper" >
 
     <select id="select_parent_category" resultType="com.apiserver.dto.CategoryDTO">
-        select * from category where parent_no = #{no};
+        <if test="no == 0" >
+            select * from category where parent_no = #{no}
+        </if>
+        <if test="no lt 5 and no gt 0">
+            select * from category where parent_no = #{no};
+        </if>
+        <if test="no gt 4 ">
+            select * from category where parent_no = (select parent_no from category where `no` = #{no});
+        </if>
     </select>
 
 

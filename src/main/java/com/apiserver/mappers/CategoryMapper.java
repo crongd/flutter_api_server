@@ -9,4 +9,6 @@ import java.util.List;
 public interface CategoryMapper {
     List<CategoryDTO> select_parent_category(int no);
 
+
+
 }
