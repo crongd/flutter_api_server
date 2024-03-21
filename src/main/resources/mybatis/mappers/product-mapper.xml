@@ -35,4 +35,8 @@
         select * from category where parent_no = 0;
     </select>
 
+    <select id="select_parent_by_category" resultType="com.apiserver.dto.CategoryDTO">
+        select * from category where parent_no = #{no};
+    </select>
+
 </mapper>

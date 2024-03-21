@@ -4,7 +4,9 @@
 <mapper namespace="com.apiserver.mappers.CategoryMapper" >
 
     <select id="select_parent_category" resultType="com.apiserver.dto.CategoryDTO">
-        select * from category where parent_no = 0;
+        select * from category where parent_no = #{no};
     </select>
+
+
 
 </mapper>

@@ -7,5 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
-    List<CategoryDTO> select_parent_category();
+    List<CategoryDTO> select_parent_category(int no);
+
 }
