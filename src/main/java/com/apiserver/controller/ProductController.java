@@ -17,12 +17,13 @@ public class ProductController {
 
     @GetMapping("/product_list")
     public List<ProductDTO> select_list(@RequestParam("no") String no) {
-        System.out.println(no);
+//        System.out.println(no);
         return productMapper.select_product_list(Integer.parseInt(no));
     }
 
     @GetMapping("/product")
     public ProductDTO select_product(@RequestParam("no") String no) {
+//        System.out.println("product:" + no);
         return productMapper.select_product(Integer.parseInt(no));
     }
 
@@ -34,7 +35,6 @@ public class ProductController {
     @PostMapping("/shopCart_product")
     public void cart_inset(@RequestBody ProductDTO productDTO) {
         System.out.println(productDTO);
-
     }
 
 

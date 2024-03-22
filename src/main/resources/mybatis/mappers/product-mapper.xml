@@ -8,10 +8,10 @@
             select * from product
         </if>
         <if test="no lt 5 and no gt 0">
-            SELECT *, p.no as p_no FROM category c left outer join product p on c.no = p.category_no where c.parent_no = #{no};
+            select * from product p right outer join category c on p.category_no = c.no where parent_no = #{no};
         </if>
         <if test="no gt 4 ">
-            SELECT * FROM shopping_db.product where category_no = #{no};
+            SELECT * FROM product where category_no = #{no};
         </if>
     </select>
 
