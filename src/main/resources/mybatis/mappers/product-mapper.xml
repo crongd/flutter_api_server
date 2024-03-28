@@ -37,7 +37,7 @@
     </select>
 
     <select id="select_basket_product" resultType="com.apiserver.dto.ProductDTO">
-        select * from shopping_cart sc inner join product p on sc.product_no = p.no;
+        select * from shopping_cart sc inner join product p on sc.product_no = p.no where user_id = #{userId};
     </select>
 
     <select id="select_parent_category" resultType="com.apiserver.dto.CategoryDTO">
@@ -48,4 +48,19 @@
         select * from category where parent_no = #{no};
     </select>
 
+    <insert id="shopping_cart_insert" parameterType="com.apiserver.dto.ShoppingCartDTO">
+        insert into shopping_cart(user_id, product_no) values(#{userId}, #{productNo});
+    </insert>
+
+    <insert id="shopping_cart_option_insert" parameterType="com.apiserver.dto.ShoppingCartDTO">
+        insert into shopping_cart_option(shopping_cart_no, product_option_no) values(last_insert_id(), #{optionNo});
+    </insert>
+
+    <update id="shopping_cart_amount_update" parameterType="com.apiserver.dto.ShoppingCartDTO">
+        update shopping_cart set amount = #{amount} where no = #{no};
+    </update>
+
+    <delete id="shopping_cart_delete" parameterType="com.apiserver.dto.ShoppingCartDTO">
+        delete from shopping_cart where no = #{no};
+    </delete>
 </mapper>

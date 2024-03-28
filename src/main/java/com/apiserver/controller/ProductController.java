@@ -1,9 +1,11 @@
 package com.apiserver.controller;
 
+import com.apiserver.dto.ShoppingCartDTO;
 import com.apiserver.mappers.ProductMapper;
 import com.apiserver.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,15 +29,28 @@ public class ProductController {
         return productMapper.select_product(Integer.parseInt(no));
     }
 
-    @GetMapping("/basket_product")
-    public List<ProductDTO> select_basket() {
-        return productMapper.select_basket_product();
+    @GetMapping("/basket_product/{userId}")
+    public List<ProductDTO> select_basket(@PathVariable("userId") String userId) {
+        System.out.println(userId);
+        return productMapper.select_basket_product(userId);
     }
 
     @PostMapping("/shopCart_product")
-    public void cart_inset(@RequestBody ProductDTO productDTO) {
-        System.out.println(productDTO);
+    @Transactional
+    public void cart_insert(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+        productMapper.shopping_cart_insert(shoppingCartDTO);
+        productMapper.shopping_cart_option_insert(shoppingCartDTO);
     }
 
+    @PatchMapping("/shpCart_amount_update")
+    public void cart_product_amount_update(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+        System.out.println(shoppingCartDTO);
+        productMapper.shopping_cart_amount_update(shoppingCartDTO);
+    }
 
+    @DeleteMapping("/shopCart_delete")
+    public void cart_product_delete(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+//        System.out.println(shoppingCartDTO);
+        productMapper.shopping_cart_delete(shoppingCartDTO);
+    }
 }
