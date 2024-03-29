@@ -3,6 +3,7 @@ package com.apiserver.mappers;
 import com.apiserver.dto.ProductDTO;
 import com.apiserver.dto.ShoppingCartDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ import java.util.List;
 public interface ProductMapper {
 
     List<ProductDTO> select_product_list(int no);
+
+    List<ProductDTO> search_product_list(@Param("no") int no,@Param("search") String search);
 
     ProductDTO select_product(int no);
 
@@ -22,6 +25,8 @@ public interface ProductMapper {
     void shopping_cart_amount_update(ShoppingCartDTO shoppingCartDTO);
 
     void shopping_cart_delete(ShoppingCartDTO shoppingCartDTO);
+
+    void shopping_cart_option_delete(ShoppingCartDTO shoppingCartDTO);
 
 }
 

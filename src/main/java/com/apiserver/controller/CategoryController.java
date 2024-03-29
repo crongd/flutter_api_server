@@ -4,12 +4,14 @@ import com.apiserver.dto.CategoryDTO;
 import com.apiserver.mappers.CategoryMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @Log4j2
 @RequiredArgsConstructor

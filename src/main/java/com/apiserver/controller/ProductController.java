@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @Log4j2
 @RequiredArgsConstructor
@@ -23,6 +24,12 @@ public class ProductController {
         return productMapper.select_product_list(Integer.parseInt(no));
     }
 
+    @GetMapping("product_search_list")
+    public List<ProductDTO> select_search_list(@RequestParam("no") String no, @RequestParam("search") String search) {
+//        System.out.println("search로 들어옴");
+        return productMapper.search_product_list(Integer.parseInt(no), search);
+    }
+
     @GetMapping("/product")
     public ProductDTO select_product(@RequestParam("no") String no) {
 //        System.out.println("product:" + no);
@@ -31,7 +38,7 @@ public class ProductController {
 
     @GetMapping("/basket_product/{userId}")
     public List<ProductDTO> select_basket(@PathVariable("userId") String userId) {
-        System.out.println(userId);
+//        System.out.println(userId);
         return productMapper.select_basket_product(userId);
     }
 
@@ -44,7 +51,7 @@ public class ProductController {
 
     @PatchMapping("/shpCart_amount_update")
     public void cart_product_amount_update(@RequestBody ShoppingCartDTO shoppingCartDTO) {
-        System.out.println(shoppingCartDTO);
+//        System.out.println(shoppingCartDTO);
         productMapper.shopping_cart_amount_update(shoppingCartDTO);
     }
 
@@ -52,5 +59,6 @@ public class ProductController {
     public void cart_product_delete(@RequestBody ShoppingCartDTO shoppingCartDTO) {
 //        System.out.println(shoppingCartDTO);
         productMapper.shopping_cart_delete(shoppingCartDTO);
+        productMapper.shopping_cart_option_delete(shoppingCartDTO);
     }
 }

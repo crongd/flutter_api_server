@@ -21,8 +21,8 @@ class ApiServerApplicationTests {
     @Test
     void contextLoads() {
 //        System.out.println(productMapper.select_product(1));
-        System.out.println(productMapper.select_product_list(1));
-//        System.out.println(productMapper.select_basket_product());
+//        System.out.println(productMapper.select_product_list(1));
+        System.out.println(productMapper.select_basket_product("test"));
 //        System.out.println(categoryMapper.select_parent_category());
 
 //        System.out.println(categoryMapper.select_parent_category(0));

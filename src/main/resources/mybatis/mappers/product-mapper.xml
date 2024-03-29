@@ -15,6 +15,18 @@
         </if>
     </select>
 
+    <select id="search_product_list" resultType="com.apiserver.dto.ProductDTO" >
+        <if test="no == 0">
+            select * from product where title like '%${search}%'
+        </if>
+        <if test="no lt 5 and no gt 0">
+            select * from product p right outer join category c on p.category_no = c.no where parent_no = #{no} and title like '%${search}%'
+        </if>
+        <if test="no gt 4 ">
+            SELECT * FROM product where category_no = #{no} and title like '%${search}%'
+        </if>
+    </select>
+
     <resultMap id="select_product_resultMap" type="com.apiserver.dto.ProductDTO" autoMapping="true">
         <id property="no" column="p_no" />
         <collection property="images" javaType="list" ofType="string">
@@ -36,8 +48,23 @@
         where p.no = #{no};
     </select>
 
-    <select id="select_basket_product" resultType="com.apiserver.dto.ProductDTO">
-        select * from shopping_cart sc inner join product p on sc.product_no = p.no where user_id = #{userId};
+    <resultMap id="basket_product_resultMap" type="com.apiserver.dto.ProductDTO" autoMapping="true">
+        <id property="no" column="p_no" />
+        <collection property="options" javaType="list" ofType="com.apiserver.dto.OptionDTO" autoMapping="true">
+            <id property="no" column="po_no" />
+        </collection>
+    </resultMap>
+
+    <select id="select_basket_product" resultMap="basket_product_resultMap">
+        select *, p.no as p_no, po.no as po_no
+        from shopping_cart sc
+        inner join shopping_cart_option sco
+        on sc.no = sco.shopping_cart_no
+        inner join product p
+        on sc.product_no = p.no
+        left outer join product_option po
+        on sco.product_option_no = po.no
+        where sc.user_id = #{userId};
     </select>
 
     <select id="select_parent_category" resultType="com.apiserver.dto.CategoryDTO">
@@ -57,10 +84,14 @@
     </insert>
 
     <update id="shopping_cart_amount_update" parameterType="com.apiserver.dto.ShoppingCartDTO">
-        update shopping_cart set amount = #{amount} where no = #{no};
+        update shopping_cart set amount = #{amount} where no = #{no}
     </update>
 
     <delete id="shopping_cart_delete" parameterType="com.apiserver.dto.ShoppingCartDTO">
-        delete from shopping_cart where no = #{no};
+        delete from shopping_cart where no = #{no}
+    </delete>
+
+    <delete id="shopping_cart_option_delete" parameterType="com.apiserver.dto.ShoppingCartDTO">
+        delete from shopping_cart_option where shopping_cart_no = #{no}
     </delete>
 </mapper>

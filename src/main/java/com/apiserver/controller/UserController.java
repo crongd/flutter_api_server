@@ -4,12 +4,14 @@ import com.apiserver.dto.UserDTO;
 import com.apiserver.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
+@CrossOrigin
 @RestController
 @Log4j2
 @RequiredArgsConstructor
