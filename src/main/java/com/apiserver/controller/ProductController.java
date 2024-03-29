@@ -52,6 +52,8 @@ public class ProductController {
     @PatchMapping("/shpCart_amount_update")
     public void cart_product_amount_update(@RequestBody ShoppingCartDTO shoppingCartDTO) {
 //        System.out.println(shoppingCartDTO);
+        System.out.println("patch 들어옴");
+        System.out.println(shoppingCartDTO);
         productMapper.shopping_cart_amount_update(shoppingCartDTO);
     }
 
