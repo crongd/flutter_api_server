@@ -49,7 +49,7 @@ public class ProductController {
         productMapper.shopping_cart_option_insert(shoppingCartDTO);
     }
 
-    @PatchMapping("/shpCart_amount_update")
+    @PatchMapping("/shopCart_amount_update")
     public void cart_product_amount_update(@RequestBody ShoppingCartDTO shoppingCartDTO) {
 //        System.out.println(shoppingCartDTO);
         System.out.println("patch 들어옴");
