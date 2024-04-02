@@ -88,7 +88,7 @@
     </update>
 
     <delete id="shopping_cart_delete" parameterType="com.apiserver.dto.ShoppingCartDTO">
-        delete from shopping_cart where no = #{no}
+        delete from shopping_cart where product_no = #{no}
     </delete>
 
     <delete id="shopping_cart_option_delete" parameterType="com.apiserver.dto.ShoppingCartDTO">
