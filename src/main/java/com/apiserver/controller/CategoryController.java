@@ -30,4 +30,9 @@ public class CategoryController {
         }
         return categoryMapper.select_parent_category(Integer.parseInt(no));
     }
+
+    @GetMapping("/all_category")
+    public List<CategoryDTO> select_all_category() {
+        return categoryMapper.select_all_category();
+    }
 }

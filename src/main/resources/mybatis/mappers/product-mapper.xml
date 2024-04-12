@@ -94,4 +94,25 @@
     <delete id="shopping_cart_option_delete" parameterType="com.apiserver.dto.ShoppingCartDTO">
         delete from shopping_cart_option where shopping_cart_no = #{no}
     </delete>
+
+    <select id="best_selling_products" resultType="com.apiserver.dto.ProductDTO">
+        SELECT
+        product_no as no,
+        count(product_no) as count,
+        p.title as title,
+        p.price as price,
+        p.main_img as main_img
+        FROM order_product op
+        inner join product p
+        on op.product_no = p.no
+
+        group by product_no
+
+        order by count desc
+        limit 20
+    </select>
+
+    <select id="recent_products" resultType="com.apiserver.dto.ProductDTO">
+        SELECT * FROM shopping_db.product order by write_date desc limit 20;
+    </select>
 </mapper>

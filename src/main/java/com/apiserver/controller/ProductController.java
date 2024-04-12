@@ -63,4 +63,14 @@ public class ProductController {
         productMapper.shopping_cart_delete(shoppingCartDTO);
         productMapper.shopping_cart_option_delete(shoppingCartDTO);
     }
+
+    @GetMapping("recent_products")
+    public List<ProductDTO> recent_products() {
+        return productMapper.recent_products();
+    }
+
+    @GetMapping("best_selling_products")
+    public List<ProductDTO> best_selling_products() {
+        return productMapper.best_selling_products();
+    }
 }

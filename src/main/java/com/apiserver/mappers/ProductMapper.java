@@ -28,5 +28,9 @@ public interface ProductMapper {
 
     void shopping_cart_option_delete(ShoppingCartDTO shoppingCartDTO);
 
+    List<ProductDTO> best_selling_products();
+
+    List<ProductDTO> recent_products();
+
 }
 
