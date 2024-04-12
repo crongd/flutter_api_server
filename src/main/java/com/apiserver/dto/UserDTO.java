@@ -2,14 +2,20 @@ package com.apiserver.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
-    private int no;
     private String id;
-    private String pw;
-    private String name;
+    private String ci;
+    private String password;
+    private String email;
+    private String tel;
+    private LocalDateTime joinDate;
+    private String pwReToken;
+    private LocalDateTime pwReTokenExpire;
 }

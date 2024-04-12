@@ -4,11 +4,11 @@
 <mapper namespace="com.apiserver.mappers.UserMapper" >
 
     <insert id="user_join" parameterType="com.apiserver.dto.UserDTO">
-        insert into user2(id, pw, name) values(#{id}, #{pw}, #{name})
+        insert into user(id, password, email, tel) values(#{id}, #{password}, #{email}, #{tel})
     </insert>
 
     <select id="user_login" resultType="com.apiserver.dto.UserDTO">
-        select * from user2 where id = #{id}
+        select * from user where id = #{id}
     </select>
 
 </mapper>

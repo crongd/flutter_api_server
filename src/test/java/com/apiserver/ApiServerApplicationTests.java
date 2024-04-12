@@ -31,6 +31,15 @@ class ApiServerApplicationTests {
 //        System.out.println(productMapper.recent_products());
 //        System.out.println(categoryMapper.select_all_category().size());
 //        System.out.println(categoryMapper.select_all_category().get(0).getCategorys().size());
+
+        String tel = "01082009859";
+        String result = "";
+        result += tel.substring(0 , 3);
+        result += "-";
+        result += tel.substring(3, 7);
+        result += "-";
+        result += tel.substring(7, 11);
+        System.out.println(result);
     }
 
 }

@@ -17,8 +17,10 @@
 
     <resultMap id="all_category_resultMap" type="com.apiserver.dto.CategoryDTO" autoMapping="true">
         <id property="no" column="c1_no" />
+        <result property="name" column="c1_name" />
         <collection property="categorys" ofType="com.apiserver.dto.CategoryDTO" javaType="list" autoMapping="true">
             <id property="no" column="c2_no" />
+            <result property="name" column="c2_name" />
         </collection>
     </resultMap>
 
@@ -26,7 +28,9 @@
         SELECT
         * ,
         c1.no as c1_no,
-        c2.no as c2_no
+        c2.no as c2_no,
+        c1.name as c1_name,
+        c2.name as c2_name
         FROM category c1
         join category c2
         on c1.no = c2.parent_no;
