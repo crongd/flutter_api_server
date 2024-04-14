@@ -2,6 +2,7 @@ package com.apiserver;
 
 import com.apiserver.dto.ProductDTO;
 import com.apiserver.mappers.CategoryMapper;
+import com.apiserver.mappers.OrderMapper;
 import com.apiserver.mappers.ProductMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ class ApiServerApplicationTests {
     ProductMapper productMapper;
     @Autowired
     CategoryMapper categoryMapper;
+    @Autowired
+    OrderMapper orderMapper;
 
 
     @Test
@@ -31,15 +34,7 @@ class ApiServerApplicationTests {
 //        System.out.println(productMapper.recent_products());
 //        System.out.println(categoryMapper.select_all_category().size());
 //        System.out.println(categoryMapper.select_all_category().get(0).getCategorys().size());
-
-        String tel = "01082009859";
-        String result = "";
-        result += tel.substring(0 , 3);
-        result += "-";
-        result += tel.substring(3, 7);
-        result += "-";
-        result += tel.substring(7, 11);
-        System.out.println(result);
+        System.out.println(orderMapper.order_of_product("jaeho9859").get(0));
     }
 
 }
