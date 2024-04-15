@@ -21,6 +21,11 @@ public class OrderController {
 
     @GetMapping("get_orders")
     public List<OrderDTO> get_orders(@RequestParam("userId") String userId) {
-        return orderMapper.order_of_product("jaeho9859");
+        List<OrderDTO> result = orderMapper.order_of_product("jaeho9859");
+        result.forEach(orderDTO -> {
+            orderDTO.setCreatedAt(orderDTO.getCreatedAt().split(" ")[0]);
+        });
+
+        return result;
     }
 }
