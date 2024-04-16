@@ -1,10 +1,12 @@
 package com.apiserver.controller;
 
 import com.apiserver.dto.ShoppingCartDTO;
+import com.apiserver.dto.UserDTO;
 import com.apiserver.mappers.ProductMapper;
 import com.apiserver.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,12 +64,12 @@ public class ProductController {
         productMapper.shopping_cart_option_delete(shoppingCartDTO);
     }
 
-    @GetMapping("recent_products")
+    @GetMapping("/recent_products")
     public List<ProductDTO> recent_products() {
         return productMapper.recent_products();
     }
 
-    @GetMapping("best_selling_products")
+    @GetMapping("/best_selling_products")
     public List<ProductDTO> best_selling_products() {
         return productMapper.best_selling_products();
     }
