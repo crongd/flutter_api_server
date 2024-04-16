@@ -24,7 +24,7 @@ public class ProductController {
         return productMapper.select_product_list(Integer.parseInt(no));
     }
 
-    @GetMapping("product_search_list")
+    @GetMapping("/product_search_list")
     public List<ProductDTO> select_search_list(@RequestParam("no") String no, @RequestParam("search") String search) {
 //        System.out.println("search로 들어옴");
         return productMapper.search_product_list(Integer.parseInt(no), search);
@@ -51,8 +51,6 @@ public class ProductController {
 
     @PatchMapping("/shopCart_amount_update")
     public void cart_product_amount_update(@RequestBody ShoppingCartDTO shoppingCartDTO) {
-//        System.out.println(shoppingCartDTO);
-        System.out.println("patch 들어옴");
         System.out.println(shoppingCartDTO);
         productMapper.shopping_cart_amount_update(shoppingCartDTO);
     }

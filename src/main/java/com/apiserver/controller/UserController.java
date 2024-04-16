@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 
 @CrossOrigin
 @RestController
@@ -39,6 +41,9 @@ public class UserController {
     @PostMapping("/user_login")
     public boolean user_login(@RequestBody UserDTO userDTO) {
         UserDTO user = userMapper.user_login(userDTO);
+        if (Objects.isNull(user)) {
+            return false;
+        }
         return passwordEncoder.matches(userDTO.getPassword(), user.getPassword());
     }
 }

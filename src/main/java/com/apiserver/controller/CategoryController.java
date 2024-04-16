@@ -18,18 +18,18 @@ import java.util.List;
 public class CategoryController {
     private final CategoryMapper categoryMapper;
 
-    @GetMapping("/parent_category")
-    public List<CategoryDTO> select_parent_category() {
-        return categoryMapper.select_parent_category(0);
-    }
+//    @GetMapping("/parent_category")
+//    public List<CategoryDTO> select_parent_category() {
+//        return categoryMapper.select_parent_category(0);
+//    }
 
-    @GetMapping("/children_category")
-    public List<CategoryDTO> select_children_category(@RequestParam("no") String no) {
-        if (Integer.parseInt(no) == 0) {
-            return null;
-        }
-        return categoryMapper.select_parent_category(Integer.parseInt(no));
-    }
+//    @GetMapping("/children_category")
+//    public List<CategoryDTO> select_children_category(@RequestParam("no") String no) {
+//        if (Integer.parseInt(no) == 0) {
+//            return null;
+//        }
+//        return categoryMapper.select_parent_category(Integer.parseInt(no));
+//    }
 
     @GetMapping("/all_category")
     public List<CategoryDTO> select_all_category() {
