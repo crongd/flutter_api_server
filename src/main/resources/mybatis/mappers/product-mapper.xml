@@ -115,4 +115,8 @@
     <select id="recent_products" resultType="com.apiserver.dto.ProductDTO">
         SELECT * FROM shopping_db.product order by write_date desc limit 20;
     </select>
+
+    <select id="main_image" resultType="string" >
+        select image from main_image;
+    </select>
 </mapper>

@@ -32,5 +32,7 @@ public interface ProductMapper {
 
     List<ProductDTO> recent_products();
 
+    List<String> main_image();
+
 }
 

@@ -17,4 +17,5 @@ public class ProductDTO {
     private List<OptionDTO> options;
     private int price;
     private int amount;
+    private int orderProductNo;
 }

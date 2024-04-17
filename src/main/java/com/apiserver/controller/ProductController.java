@@ -73,4 +73,9 @@ public class ProductController {
     public List<ProductDTO> best_selling_products() {
         return productMapper.best_selling_products();
     }
+
+    @GetMapping("/main_image")
+    public List<String> main_image() {
+        return productMapper.main_image();
+    }
 }
