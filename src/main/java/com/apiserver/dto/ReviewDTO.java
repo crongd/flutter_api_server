@@ -18,5 +18,4 @@ public class ReviewDTO {
     private int rate;
     private LocalDateTime writeDate;
 
-
 }
