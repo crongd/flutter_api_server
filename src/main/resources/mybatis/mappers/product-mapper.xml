@@ -15,37 +15,70 @@
         </if>
     </select>
 
-    <select id="search_product_list" resultType="com.apiserver.dto.ProductDTO" >
-        <if test="no == 0">
-            select * from product where title like '%${search}%'
-        </if>
-        <if test="no lt 5 and no gt 0">
-            select * from product p right outer join category c on p.category_no = c.no where parent_no = #{no} and title like '%${search}%'
-        </if>
-        <if test="no gt 4 ">
-            SELECT * FROM product where category_no = #{no} and title like '%${search}%'
-        </if>
-    </select>
-
     <resultMap id="select_product_resultMap" type="com.apiserver.dto.ProductDTO" autoMapping="true">
-        <id property="no" column="p_no" />
-        <collection property="images" javaType="list" ofType="string">
-            <result column="product_img"/>
+        <id property="no" column="product_no" />
+
+<!--        <association property="category" javaType="com.shop.dto.product.Category">-->
+<!--            <id property="no" column="category_no" />-->
+<!--        </association>-->
+
+
+        <collection property="images" ofType="string" javaType="list">
+            <result column="product_img" />
         </collection>
-        <collection property="options" javaType="list" ofType="com.apiserver.dto.OptionDTO" autoMapping="true">
-            <id property="no" column="po_no"/>
-            <result property="productNo" column="" />
+
+        <collection property="options" ofType="com.apiserver.dto.OptionDTO" javaType="list">
+            <id property="no" column="option_no" />
+            <result property="name" column="name" />
+        </collection>
+
+        <collection property="reviews" ofType="com.apiserver.dto.ReviewDTO" javaType="list" autoMapping="true">
+            <id property="no" column="r_no"/>
+            <result property="userId" column="r_user_id" />
+            <result property="productNo" column="r_product_no" />
+            <result property="averageRate" column="averageRate" />
+            <collection property="users" ofType="string" javaType="list">
+                <result column="rl_user"/>
+            </collection>
         </collection>
     </resultMap>
 
     <select id="select_product" resultMap="select_product_resultMap" >
-        select *,p.no as p_no, pi.no as pi_no, po.no as po_no
+        select
+        p.no as product_no,
+        p.title,
+        p.price,
+        p.main_img,
+
+        pi.no as image_no,
+        pi.product_img,
+
+        po.no as option_no,
+        po.name,
+        po.additional_price,
+
+        r.no as r_no,
+        r.user_id as r_user_id,
+        r.product_no as r_product_no,
+        r.content,
+        r.rate,
+        r.write_date,
+
+        rl.user_id as rl_user,
+
+        Round((select avg(rate) from review where product_no = #{no}), 1) as averageRate
+
         from product p
-        inner join product_img pi
+        left outer join product_img pi
         on p.no = pi.product_no
-        left outer join product_option po
+        left outer join `product_option` po
         on p.no = po.product_no
-        where p.no = #{no};
+        left outer join review r
+        on p.no = r.product_no
+        left outer join review_like rl
+        on r.no = rl.review_no
+        where p.no = #{no}
+        order by pi.no;
     </select>
 
     <resultMap id="basket_product_resultMap" type="com.apiserver.dto.ProductDTO" autoMapping="true">

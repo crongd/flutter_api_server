@@ -21,7 +21,28 @@
         on o.order_id = op.order_id
         inner join product p
         on op.product_no = p.no
-        where o.user_id = #{userId};
+        where o.user_id = #{userId}
+        and op.no not in (select order_product_no from review);
+    </select>
+
+    <insert id="add_review" parameterType="com.apiserver.dto.ReviewDTO">
+        insert into
+        review(user_id, order_product_no, product_no, content, rate)
+        values(#{userId}, #{orderProductNo}, #{productNo}, #{content}, #{rate})
+    </insert>
+
+    <resultMap id="written_review_resultMap" type="com.apiserver.dto.ReviewDTO" autoMapping="true">
+        <id property="no" column="r_no" />
+        <association property="product" javaType="com.apiserver.dto.ProductDTO" autoMapping="true">
+            <id property="no" column="p_no"/>
+        </association>
+    </resultMap>
+
+    <select id="get_written_review" resultMap="written_review_resultMap">
+        SELECT *, r.no as r_no, p.no as p_no FROM review r
+        inner join product p
+        on r.product_no = p.no
+        where user_id = #{userId};
     </select>
 
 </mapper>

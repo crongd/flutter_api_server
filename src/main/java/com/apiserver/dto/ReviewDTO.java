@@ -3,6 +3,7 @@ package com.apiserver.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +17,8 @@ public class ReviewDTO {
     private int productNo;
     private String content;
     private int rate;
-    private LocalDateTime writeDate;
-
+    private ProductDTO product;
+    private String writeDate;
+    private double averageRate;
+    private List<String> users;
 }

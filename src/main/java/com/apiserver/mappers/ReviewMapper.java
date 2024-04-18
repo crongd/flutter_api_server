@@ -11,4 +11,9 @@ public interface ReviewMapper {
 
 //    List<ReviewDTO> get
     List<ProductDTO> get_order_product(String userId);
+
+    List<ReviewDTO> get_written_review(String userId);
+
+    void add_review(ReviewDTO reviewDTO);
+
 }

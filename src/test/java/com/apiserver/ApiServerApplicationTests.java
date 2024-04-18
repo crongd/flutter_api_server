@@ -25,7 +25,7 @@ class ApiServerApplicationTests {
 
     @Test
     void contextLoads() {
-//        System.out.println(productMapper.select_product(1));
+        System.out.println(productMapper.select_product(409));
 //        System.out.println(productMapper.select_product_list(1));
 //        System.out.println(productMapper.select_basket_product("test"));
 //        System.out.println(categoryMapper.select_parent_category());
@@ -38,7 +38,8 @@ class ApiServerApplicationTests {
 //        System.out.println(categoryMapper.select_all_category().get(0).getCategorys().size());
 //        System.out.println(orderMapper.order_of_product("jaeho9859").get(0));
 //        System.out.println(productMapper.main_image());
-        System.out.println(reviewMapper.get_order_product("jaeho9859").get(0));
+//        System.out.println(reviewMapper.get_order_product("jaeho9859").get(0));
+//        System.out.println(reviewMapper.get_written_review("jaeho9859").size());
     }
 
 }

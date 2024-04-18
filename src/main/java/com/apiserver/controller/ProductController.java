@@ -34,8 +34,12 @@ public class ProductController {
 
     @GetMapping("/product")
     public ProductDTO select_product(@RequestParam("no") String no) {
-//        System.out.println("product:" + no);
-        return productMapper.select_product(Integer.parseInt(no));
+        ProductDTO result = productMapper.select_product(Integer.parseInt(no));
+        result.getReviews().forEach(review -> {
+            review.setWriteDate(review.getWriteDate().split(" ")[0]);
+        });
+        System.out.println(result);
+        return result;
     }
 
     @GetMapping("/basket_product/{userId}")
