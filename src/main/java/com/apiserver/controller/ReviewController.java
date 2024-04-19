@@ -45,6 +45,18 @@ public class ReviewController {
             @RequestParam("reviewNo") String reviewNo,
             @RequestParam("userId") String userId
     ) {
+        System.out.println(reviewNo);
+        System.out.println(userId);
+        reviewMapper.review_like_add(Integer.parseInt(reviewNo), userId);
+    }
 
+    @DeleteMapping("/review_like")
+    public void review_like_delete(
+            @RequestParam("reviewNo") String reviewNo,
+            @RequestParam("userId") String userId
+    ) {
+        System.out.println(reviewNo);
+        System.out.println(userId);
+        reviewMapper.review_like_delete(Integer.parseInt(reviewNo), userId);
     }
 }

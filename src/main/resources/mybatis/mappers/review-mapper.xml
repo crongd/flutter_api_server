@@ -45,4 +45,13 @@
         where user_id = #{userId};
     </select>
 
+
+    <insert id="review_like_add" >
+        insert into review_like values(#{userId}, #{no})
+    </insert>
+
+    <delete id="review_like_delete">
+        delete from review_like where user_id = #{userId} and review_no = #{no};
+    </delete>
+
 </mapper>

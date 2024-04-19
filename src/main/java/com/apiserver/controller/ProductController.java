@@ -38,7 +38,7 @@ public class ProductController {
         result.getReviews().forEach(review -> {
             review.setWriteDate(review.getWriteDate().split(" ")[0]);
         });
-        System.out.println(result);
+//        System.out.println(result);
         return result;
     }
 
