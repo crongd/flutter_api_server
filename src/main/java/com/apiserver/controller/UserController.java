@@ -51,4 +51,11 @@ public class UserController {
         result.setJoinDate(result.getJoinDate().split(" ")[0]);
         return result;
     }
+
+    @PatchMapping("/user_password")
+    public void user_re_password(@RequestBody UserDTO userDTO) {
+        System.out.println(userDTO);
+        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        userMapper.user_re_password(userDTO);
+    }
 }

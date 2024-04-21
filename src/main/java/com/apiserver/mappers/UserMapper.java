@@ -9,4 +9,6 @@ public interface UserMapper {
     void user_join(UserDTO userDTO);
 
     UserDTO user_login(UserDTO userDTO);
+
+    void user_re_password(UserDTO userDTO);
 }

@@ -19,7 +19,7 @@ public class OrderController {
 
     final OrderMapper orderMapper;
 
-    @GetMapping("get_orders")
+    @GetMapping("/get_orders")
     public List<OrderDTO> get_orders(@RequestParam("userId") String userId) {
 //        System.out.println(userId);
         List<OrderDTO> result = orderMapper.order_of_product(userId);

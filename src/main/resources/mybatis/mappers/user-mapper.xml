@@ -11,5 +11,8 @@
         select * from user where id = #{id}
     </select>
 
+    <update id="user_re_password" parameterType="com.apiserver.dto.UserDTO">
+        update user set password = #{password} where id = #{id}
+    </update>
 
 </mapper>
