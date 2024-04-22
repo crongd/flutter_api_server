@@ -5,6 +5,7 @@ import com.apiserver.mappers.CategoryMapper;
 import com.apiserver.mappers.OrderMapper;
 import com.apiserver.mappers.ProductMapper;
 import com.apiserver.mappers.ReviewMapper;
+import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,9 +26,11 @@ class ApiServerApplicationTests {
     OrderMapper orderMapper;
     @Autowired
     ReviewMapper reviewMapper;
+    @Autowired
+    PortOneService portOneService;
 
     @Test
-    void contextLoads() {
+    void contextLoads() throws JSONException {
 //        System.out.println(productMapper.select_product(409));
 //        System.out.println(productMapper.select_product_list(1));
 //        System.out.println(productMapper.select_basket_product("test"));
@@ -43,9 +46,11 @@ class ApiServerApplicationTests {
 //        System.out.println(productMapper.main_image());
 //        System.out.println(reviewMapper.get_order_product("jaeho9859").get(0));
 //        System.out.println(reviewMapper.get_written_review("jaeho9859").size());
-        System.out.println(UUID.randomUUID());
+//        System.out.println(UUID.randomUUID());
 
 //        System.out.println(System.currentTimeMillis());
+//        System.out.println(portOneService.get_access_token());
+        System.out.println(portOneService.get_user_certification_phone("imp_378004327741", portOneService.get_access_token()));
     }
 
 }

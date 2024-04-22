@@ -4,7 +4,7 @@
 <mapper namespace="com.apiserver.mappers.UserMapper" >
 
     <insert id="user_join" parameterType="com.apiserver.dto.UserDTO">
-        insert into user(id, password, email, tel) values(#{id}, #{password}, #{email}, #{tel})
+        insert into user(id, ci, password, email, tel) values(#{id}, #{ci}, #{password}, #{email}, #{tel})
     </insert>
 
     <select id="user_login" resultType="com.apiserver.dto.UserDTO">

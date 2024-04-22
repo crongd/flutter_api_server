@@ -7,7 +7,6 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@EnableAspectJAutoProxy
 public class MainConfig {
     @Bean
     public RestOperations restOperations() {

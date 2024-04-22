@@ -1,5 +1,6 @@
 package com.apiserver.controller;
 
+import com.apiserver.PortOneService;
 import com.apiserver.dto.UserDTO;
 import com.apiserver.mappers.UserMapper;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 
 @CrossOrigin
@@ -16,23 +18,35 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserController {
 
+    private final PortOneService portOneService;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping("/user_join")
-    public String user_join(@RequestBody UserDTO userDTO) {
+    @PostMapping("/user_join/{imp_uid}")
+    public Boolean user_join(
+            @RequestBody UserDTO userDTO,
+            @PathVariable("imp_uid") String impUID
+    ) {
 //        userMapper.user_join(userDTO);
-        String tel = "";
-        tel += userDTO.getTel().substring(0, 3);
-        tel += "-";
-        tel += userDTO.getTel().substring(3, 7);
-        tel += "-";
-        tel += userDTO.getTel().substring(7, 11);
-        userDTO.setTel(tel);
-        System.out.println(userDTO);
-        userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        userMapper.user_join(userDTO);
-        return "가입 성공";
+        // 실제 인증한 전화번호
+        System.out.println("join 들어옴");
+        String resultPhone = portOneService.get_user_certification_phone(impUID, portOneService.get_access_token());
+        if (Objects.equals(userDTO.getTel(), resultPhone)) {
+            String tel = "";
+            tel += userDTO.getTel().substring(0, 3);
+            tel += "-";
+            tel += userDTO.getTel().substring(3, 7);
+            tel += "-";
+            tel += userDTO.getTel().substring(7, 11);
+            userDTO.setTel(tel);
+            userDTO.setCi(UUID.randomUUID().toString());
+            System.out.println(userDTO);
+            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            userMapper.user_join(userDTO);
+            return true;
+        }
+
+        return false;
     }
 
     @PostMapping("/user_login")
