@@ -9,4 +9,8 @@ import java.util.List;
 public interface OrderMapper {
 
     List<OrderDTO> order_of_product(String id);
+
+    void order_add(OrderDTO orderDTO);
+    void order_product_add(OrderDTO orderDTO);
+    void shopping_cart_delete(OrderDTO orderDTO);
 }

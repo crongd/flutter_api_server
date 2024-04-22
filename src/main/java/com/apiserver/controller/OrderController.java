@@ -4,12 +4,11 @@ import com.apiserver.dto.OrderDTO;
 import com.apiserver.mappers.OrderMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -28,6 +27,18 @@ public class OrderController {
         });
 
         return result;
+    }
+
+    @PostMapping("/add_order")
+    @Transactional
+    public void add_order(@RequestBody OrderDTO orderDTO) {
+        orderDTO.setOrderId(UUID.randomUUID().toString());
+        orderDTO.setPaidAt((int) System.currentTimeMillis());
+        System.out.println(orderDTO);
+        orderMapper.order_add(orderDTO);
+        orderMapper.order_product_add(orderDTO);
+        orderMapper.shopping_cart_delete(orderDTO);
+
     }
 
 

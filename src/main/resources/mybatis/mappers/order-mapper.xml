@@ -4,7 +4,7 @@
 <mapper namespace="com.apiserver.mappers.OrderMapper" >
 
     <resultMap id="order_of_product_resultMap" type="com.apiserver.dto.OrderDTO" autoMapping="true">
-        <id property="merchantUid" column="o_no" />
+        <id property="orderId" column="o_no" />
         <collection property="products" ofType="com.apiserver.dto.ProductDTO" javaType="list" autoMapping="true" >
             <id property="no" column="p_no" />
             <result property="amount" column="op_amount"/>
@@ -24,5 +24,23 @@
         on op.product_no = p.no
         where o.user_id = #{id};
     </select>
+
+    <insert id="order_add" parameterType="com.apiserver.dto.OrderDTO">
+        insert into `order`(order_id, imp_uid, user_id, name, addr, post_code, amount, paid_at, pay_method, pg_id)
+        values (#{orderId}, #{impUid}, #{user.id}, #{name}, #{buyerAddr}, #{buyerPostcode}, #{amount}, #{paidAt}, #{payMethod}, #{pgId})
+    </insert>
+
+    <insert id="order_product_add" parameterType="com.apiserver.dto.OrderDTO">
+
+        insert into `order_product`(order_id, product_no, product_option, product_main_img, amount) values
+        <foreach collection="products" item="product" separator=",">
+            (#{orderId}, #{product.no}, #{product.options[0].no}, #{product.mainImg}, #{product.amount})
+        </foreach>
+    </insert>
+
+    <delete id="shopping_cart_delete" parameterType="com.apiserver.dto.OrderDTO">
+        delete from shopping_cart where user_id = #{user.id};
+    </delete>
+
 
 </mapper>

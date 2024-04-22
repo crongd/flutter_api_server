@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 class ApiServerApplicationTests {
@@ -25,7 +28,7 @@ class ApiServerApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(productMapper.select_product(409));
+//        System.out.println(productMapper.select_product(409));
 //        System.out.println(productMapper.select_product_list(1));
 //        System.out.println(productMapper.select_basket_product("test"));
 //        System.out.println(categoryMapper.select_parent_category());
@@ -40,6 +43,9 @@ class ApiServerApplicationTests {
 //        System.out.println(productMapper.main_image());
 //        System.out.println(reviewMapper.get_order_product("jaeho9859").get(0));
 //        System.out.println(reviewMapper.get_written_review("jaeho9859").size());
+        System.out.println(UUID.randomUUID());
+
+//        System.out.println(System.currentTimeMillis());
     }
 
 }
