@@ -27,9 +27,9 @@ public class ProductController {
     }
 
     @GetMapping("/product_search_list")
-    public List<ProductDTO> select_search_list(@RequestParam("no") String no, @RequestParam("search") String search) {
-//        System.out.println("search로 들어옴");
-        return productMapper.search_product_list(Integer.parseInt(no), search);
+    public List<ProductDTO> select_search_list(@RequestParam("search") String search) {
+        System.out.println("search로 들어옴");
+        return productMapper.search_product_list(search);
     }
 
     @GetMapping("/product")

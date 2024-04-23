@@ -4,15 +4,11 @@
 <mapper namespace="com.apiserver.mappers.ProductMapper" >
 
     <select id="select_product_list" resultType="com.apiserver.dto.ProductDTO" >
-        <if test="no == 0">
-            select * from product
-        </if>
-        <if test="no lt 5 and no gt 0">
-            select * from product p right outer join category c on p.category_no = c.no where parent_no = #{no};
-        </if>
-        <if test="no gt 4 ">
-            SELECT * FROM product where category_no = #{no};
-        </if>
+        SELECT * FROM product where category_no = #{no};
+    </select>
+
+    <select id="search_product_list" resultType="com.apiserver.dto.ProductDTO" >
+        SELECT * FROM product WHERE title LIKE '%${search}%';
     </select>
 
     <resultMap id="select_product_resultMap" type="com.apiserver.dto.ProductDTO" autoMapping="true">

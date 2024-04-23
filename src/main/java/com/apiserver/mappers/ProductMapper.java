@@ -12,7 +12,7 @@ public interface ProductMapper {
 
     List<ProductDTO> select_product_list(int no);
 
-    List<ProductDTO> search_product_list(@Param("no") int no,@Param("search") String search);
+    List<ProductDTO> search_product_list(@Param("search") String search);
 
     ProductDTO select_product(int no);
 
