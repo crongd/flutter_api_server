@@ -72,4 +72,11 @@ public class UserController {
         userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userMapper.user_re_password(userDTO);
     }
+
+    @GetMapping("/user_id_duplication_check")
+    public Boolean id_duplication_check(@RequestParam("id") String id) {
+        UserDTO user = userMapper.user_id_check(id);
+        if (Objects.isNull(user)) return false;
+        else return true;
+    }
 }

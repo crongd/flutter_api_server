@@ -11,4 +11,6 @@ public interface UserMapper {
     UserDTO user_login(UserDTO userDTO);
 
     void user_re_password(UserDTO userDTO);
+
+    UserDTO user_id_check(String id);
 }
